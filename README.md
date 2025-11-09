@@ -5,7 +5,7 @@ Transformo métricas em estratégia.
 Atuo na interseção entre **conteúdo criativo, performance digital e análise de dados**, otimizando campanhas com foco em ROI, LTV e CAC.
 
 ---
-LinkedIn 
+[LinkedIn](https://www.linkedin.com/in/bruno-aguiar-marketing-analytics/)
 
 ## Sobre mim  
 
