@@ -7,7 +7,7 @@ Building multi-agent systems with Python & LangChain.
 
 ## Sobre
 
-Passei 12 anos aprendendo a contar histórias — Globo, Lollapalooza, The Town.
+Passei 12 anos aprendendo a contar histórias pela Globo, Lollapalooza, The Town, Circuito sertanejo entre outros. 
 Aprendi que a parte mais difícil não é criar, é fazer alguém entender algo complexo em segundos.
 
 Hoje faço isso com sistemas de IA.
