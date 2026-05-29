@@ -7,16 +7,9 @@ Building multi-agent systems with Python & LangChain.
 
 ## Sobre
 
-Passei 12 anos aprendendo a contar histórias pela Globo, Lollapalooza, The Town, Circuito sertanejo entre outros. 
-Aprendi que a parte mais difícil não é criar, é fazer alguém entender algo complexo em segundos.
+Construo sistemas de IA que rodam em produção — não demos, não tutoriais.
 
-Hoje faço isso com sistemas de IA.
-
-Estou construindo o **Cortex**: plataforma multi-agente com 15 agentes especializados em Python que processa notícias globais, analisa dados macroeconômicos, gera newsletters automatizadas e identifica sinais de mercado  pipeline integrado com LLMs, RAG e orquestração assíncrona.
-
-No G4 Educação cruzo performance digital com automação inteligente.
-
----
+O projeto principal é o **[Cortex](https://github.com/btaguiar/cortex-multi-agent)**: 15 agentes especializados em Python em pipeline assíncrono. Processa notícias de múltiplas fontes, analisa 17 indicadores macroeconômicos via FRED API, detecta padrões de recessão contra histórico de 2001/2008/2020, gera newsletter diária com two-pass LLM (GLM-5.1 → Claude Opus) e entrega via Telegram — automaticamente, todos os dias.
 
 ## Stack
 
@@ -32,6 +25,13 @@ No G4 Educação cruzo performance digital com automação inteligente.
 ---
 
 ## Projetos
+
+### [Cortex — Multi-Agent AI System](https://github.com/btaguiar/cortex-multi-agent)
+`Python` `LangChain` `LLMs` `RAG` `Multi-Agent` `Claude API`
+
+15 agentes especializados em produção — briefing diário, análise macro, newsletter two-pass LLM, detecção de padrões de recessão e Telegram delivery.
+
+---
 
 ### [BRMP — Brazilian Match Prediction](https://github.com/btaguiar/BRMP-Brazilian-Match-Prediction)
 `Python` `XGBoost` `LightGBM` `Scikit-learn` `Machine Learning`
