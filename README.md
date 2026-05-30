@@ -7,7 +7,7 @@ Building multi-agent systems with Python & LangChain.
 
 ## Sobre
 
-Construo sistemas de IA que rodam em produção — não demos, não tutoriais.
+Construo sistemas de IA que rodam em produção.
 
 O projeto principal é o **[Cortex](https://github.com/btaguiar/cortex-multi-agent)**: 15 agentes especializados em Python em pipeline assíncrono. Processa notícias de múltiplas fontes, analisa 17 indicadores macroeconômicos via FRED API, detecta padrões de recessão contra histórico de 2001/2008/2020, gera newsletter diária com two-pass LLM (GLM-5.1 → Claude Opus) e entrega via Telegram — automaticamente, todos os dias.
 
