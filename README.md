@@ -1,71 +1,68 @@
 # Bruno Aguiar
 
-**AI Engineer** | São Paulo, SP
-Building multi-agent systems with Python & LangChain.
+**AI Engineer** · São Paulo
 
----
+Todo dia às 9h40 um agente meu abre as vagas novas de AI Engineer no LinkedIn, lê a descrição inteira de cada uma, extrai as skills exigidas e pontua o fit contra o meu perfil. Dez minutos antes, outro já publicou a newsletter do dia em [olhonomundo.com.br](https://olhonomundo.com.br).
 
-## Sobre
+Nenhum dos dois me pede nada. É isso que eu construo: sistemas de agentes que rodam sozinhos em produção, e que falham de forma visível quando falham.
 
-Construo sistemas de IA que rodam em produção.
+## No ar
 
-O projeto principal é o **[Cortex](https://github.com/btaguiar/cortex-multi-agent)**: 15 agentes especializados em Python em pipeline assíncrono. Processa notícias de múltiplas fontes, analisa 17 indicadores macroeconômicos via FRED API, detecta padrões de recessão contra histórico de 2001/2008/2020, gera newsletter diária com two-pass LLM (GLM-5.1 → Claude Opus) e entrega via Telegram — automaticamente, todos os dias.
+### Cortex
+
+27 agentes em Python, mais de 40 jobs agendados, 1.950 testes. Roda numa VPS sob systemd, sem ninguém olhando.
+
+- Newsletter diária em dois passos: um modelo monta a estrutura, outro escreve a narrativa. Separar as duas coisas cortou alucinação e deixou o texto em português puro.
+- O agente de vagas abre cada vaga nova, extrai as skills com vocabulário determinístico, sem gastar LLM onde regra resolve, e só então usa uma chamada de modelo para pontuar o fit.
+- Provedor de LLM tem fallback em cadeia. Fonte desligada por política fica atrás de kill-switch, com o código intacto: desligar não é apagar.
+- Quando o túnel de coleta cai, o job falha rápido e com motivo, em vez de subir um browser sem sessão e queimar meia hora em timeout.
+
+Espelho público, defasado, porque a produção é privada: [cortex-multi-agent](https://github.com/btaguiar/cortex-multi-agent)
+
+### [olhonomundo.com.br](https://olhonomundo.com.br)
+
+Portal em Next.js que transforma cada newsletter do Cortex em matérias navegáveis, com categorização por tópico e foto escolhida pelo assunto da matéria. O conteúdo é gerado pelo pipeline; o site só publica.
+
+## Em construção
+
+### [pauta](https://github.com/btaguiar/pauta)
+
+`LangGraph` `FastAPI` `pgvector` `Python`
+
+Briefings analíticos multi-agente: supervisor → pesquisa → análise → crítica → redação, com humano no meio e streaming por SSE. O smoke test da demo e do stream roda no CI a cada mudança.
+
+### [grifo](https://github.com/btaguiar/grifo)
+
+`RAG` `Qdrant` `Reranker` `Python`
+
+Assistente de dúvidas para cursos que responde só com o material oficial e cita módulo, aula e minuto. Quando a resposta não está no material, ele diz que não sabe em vez de inventar.
 
 ## Stack
 
-| Categoria | Ferramentas |
-|-----------|-------------|
-| **IA & LLMs** | LangChain · Claude API · OpenAI · RAG · Prompt Engineering |
-| **Multi-Agent** | Arquitetura de agentes · Orquestração assíncrona · Knowledge Bus |
-| **Python** | FastAPI · Pandas · NumPy · Scikit-learn · XGBoost · LightGBM |
-| **Cloud** | GCP (BigQuery, GCS) · AWS (S3, EC2, Lambda) · Docker |
-| **Dados** | SQL · PostgreSQL · ChromaDB · Redis · BigQuery |
-| **Analytics** | Power BI · Looker Studio · Matplotlib · Seaborn |
+| | |
+|---|---|
+| **LLM e agentes** | LangChain · LangGraph · CrewAI · Claude · GLM · OpenAI · RAG · Prompt Engineering · Fine-tuning |
+| **Dados e recuperação** | PostgreSQL · pgvector · Qdrant · ChromaDB · Redis · SQL |
+| **Backend e infra** | Python · FastAPI · Docker · AWS · systemd · Git |
+| **ML** | Scikit-learn · XGBoost · LightGBM · Pandas · NumPy |
+| **Front** | Next.js · TypeScript · Tailwind |
 
----
+## Outros repositórios
 
-## Projetos
+**[BRMP](https://github.com/btaguiar/BRMP-Brazilian-Match-Prediction)**: previsão de resultados do Brasileirão com validação temporal e modelos calibrados.
 
-### [Cortex — Multi-Agent AI System](https://github.com/btaguiar/cortex-multi-agent)
-`Python` `LangChain` `LLMs` `RAG` `Multi-Agent` `Claude API`
+**[SCS](https://github.com/btaguiar/SCS-Analise-Performance-360)**: análise multivariada de performance em Python, com ROI médio de 1.645% e CPA mínimo de R$ 126.
 
-15 agentes especializados em produção — briefing diário, análise macro, newsletter two-pass LLM, detecção de padrões de recessão e Telegram delivery.
-
----
-
-### [BRMP — Brazilian Match Prediction](https://github.com/btaguiar/BRMP-Brazilian-Match-Prediction)
-`Python` `XGBoost` `LightGBM` `Scikit-learn` `Machine Learning`
-
-Pipeline end-to-end de previsão de resultados do Brasileirão Série A.
-Feature engineering avançado, validação temporal e modelos calibrados.
-
----
-
-### [SCS — Análise de Performance 360°](https://github.com/btaguiar/SCS-Analise-Performance-360)
-`Python` `Pandas` `Matplotlib` `Seaborn`
-
-Análise multivariada de performance de mídia paga.
-ROI médio de **1.645%** · CPA mínimo **R$ 126** · CTR máximo **4,59%**
-
----
-
-### [BK-DEP — Otimização de Campanha Bancária](https://github.com/btaguiar/BK_DEP_Otimiza-o_de_Convers-o)
-`Python` `PyMC` `Bayesian Inference` `A/B Testing`
-
-Modelagem bayesiana aplicada à análise de conversão.
-Redução de **30% no CPA** com identificação de segmentos de alta propensão.
-
----
+**[BK-DEP](https://github.com/btaguiar/BK_DEP_Otimiza-o_de_Convers-o)**: modelagem bayesiana de conversão, com 30% de redução no CPA.
 
 ## Formação
 
-**Tecnólogo em Inteligência Artificial** *(em andamento, 2025–2027)*
+**Tecnólogo em Inteligência Artificial**, em andamento (2025-2027)
 
-**FAPCOM** — Bacharelado em Rádio, TV e Comunicação Digital *(2014–2017)*
-
----
+**FAPCOM**: bacharelado em Rádio, TV e Comunicação Digital (2014-2017)
 
 ## Contato
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Bruno%20Aguiar-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/bruno-aguiar-ai-engineer/)
-📧 bruno.aguiarsp@outlook.com
+
+bruno.aguiarsp@outlook.com
