@@ -42,9 +42,7 @@ Laudo de risco de crédito para PMEs brasileiras. Um modelo em BigQuery ML calcu
 
 Assistente de dúvidas para cursos que responde só com o material oficial e cita módulo, aula e o minuto do vídeo, com o nome de quem fala. Quando a resposta não está no material, recusa: 11 de 11 recusas corretas. O juiz de alucinação foi calibrado contra rótulos humanos (κ = 0,905) antes de eu confiar no 0% que ele deu.
 
-## Em construção
-
-### [quimera](https://github.com/btaguiar/quimera)
+### [quimera](https://github.com/btaguiar/quimera) · [demo](https://quimera-leads.web.app)
 
 `Gemini` `Embeddings` `BigQuery` `Cloud Run` `React`
 
@@ -54,7 +52,7 @@ Transforma um pedido em português ("clínicas odontológicas abertas há mais d
 - Toda consulta tem teto de custo. Materializei os 27,8 milhões de estabelecimentos ativos numa tabela particionada, e o pedido caiu de ~13 GB para 33–250 MB.
 - Avaliado em 10.000 pedidos sintéticos com gabarito gerado por template, nunca por LLM: 92% dos casos 100% corretos e 100% de recusa em pedido de dado pessoal.
 
-No ar em modo privado; a abertura ao público é o próximo passo.
+## Em construção
 
 ### [pauta](https://github.com/btaguiar/pauta)
 
