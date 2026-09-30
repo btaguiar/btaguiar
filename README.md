@@ -6,6 +6,8 @@ Todo dia às 9h40 um agente meu abre as vagas novas de AI Engineer no LinkedIn, 
 
 Nenhum dos dois me pede nada. É isso que eu construo: sistemas de agentes que rodam sozinhos em produção, e que falham de forma visível quando falham.
 
+Tenho uma regra em todos os projetos: nenhum número no README sem um eval que o reproduza. O LLM extrai, explica e redige; quem decide o número é modelo, regra ou SQL que eu consigo testar.
+
 ## No ar
 
 ### Cortex
@@ -23,29 +25,50 @@ Espelho público, defasado, porque a produção é privada: [cortex-multi-agent]
 
 Portal em Next.js que transforma cada newsletter do Cortex em matérias navegáveis, com categorização por tópico e foto escolhida pelo assunto da matéria. O conteúdo é gerado pelo pipeline; o site só publica.
 
+### [pme-risk](https://github.com/btaguiar/pme-risk) · [demo](https://pme-risk-demo.web.app)
+
+`BigQuery ML` `Gemini` `FastAPI` `Cloud Run`
+
+Laudo de risco de crédito para PMEs brasileiras. Um modelo em BigQuery ML calcula a probabilidade de inadimplência; agentes extraem o pedido em português, conferem o CNPJ na Receita e redigem o laudo; um analista aprova ou rejeita antes de ele valer.
+
+- O LLM não tem permissão para mexer na PD. Um juiz determinístico, sem LLM, confere se cada número do laudo bate com o pedido ou com o modelo: 99,9% de fidedignidade.
+- Extração com F1 de 0,99 e 100% de recusa correta fora de escopo, num golden set de 80 pedidos.
+- Achei um vazamento na base da SBA: o prazo do empréstimo é regravado depois do calote e carrega o desfecho. Tirei a feature e um teste impede que ela volte, mesmo custando AUC.
+- O multi-agente só ficou porque venceu o baseline de chamada única na métrica que importava.
+
+### [grifo](https://github.com/btaguiar/grifo) · [demo](https://grifo-one.vercel.app)
+
+`RAG` `Qdrant` `Reranker` `Pydantic` `Python`
+
+Assistente de dúvidas para cursos que responde só com o material oficial e cita módulo, aula e o minuto do vídeo, com o nome de quem fala. Quando a resposta não está no material, recusa: 11 de 11 recusas corretas. O juiz de alucinação foi calibrado contra rótulos humanos (κ = 0,905) antes de eu confiar no 0% que ele deu.
+
+### [quimera](https://github.com/btaguiar/quimera) · [demo](https://quimera-leads.web.app)
+
+`Gemini` `Embeddings` `BigQuery` `Cloud Run` `React`
+
+Transforma um pedido em português ("clínicas odontológicas abertas há mais de 2 anos em Santo André") numa lista ranqueada de empresas do cadastro público de CNPJ.
+
+- O LLM nunca escreve SQL: ele só preenche um schema de filtros, e a consulta é parametrizada e minha.
+- Toda consulta tem teto de custo. Materializei os 27,8 milhões de estabelecimentos ativos numa tabela particionada, e o pedido caiu de ~13 GB para 33–250 MB.
+- Avaliado em 10.000 pedidos sintéticos com gabarito gerado por template, nunca por LLM: 92% dos casos 100% corretos e 100% de recusa em pedido de dado pessoal.
+
 ## Em construção
 
 ### [pauta](https://github.com/btaguiar/pauta)
 
-`LangGraph` `FastAPI` `pgvector` `Python`
+`LangGraph` `FastAPI` `PostgreSQL` `Python`
 
-Briefings analíticos multi-agente: supervisor → pesquisa → análise → crítica → redação, com humano no meio e streaming por SSE. O smoke test da demo e do stream roda no CI a cada mudança.
-
-### [grifo](https://github.com/btaguiar/grifo)
-
-`RAG` `Qdrant` `Reranker` `Python`
-
-Assistente de dúvidas para cursos que responde só com o material oficial e cita módulo, aula e minuto. Quando a resposta não está no material, ele diz que não sabe em vez de inventar.
+Briefings analíticos multi-agente: supervisor → pesquisa → análise → crítica → redação, com humano no meio e orçamento de tokens. O CI sobe um Postgres, mata o processo com `kill()` no meio da run e prova que ela retoma do checkpoint em outro processo.
 
 ## Stack
 
 | | |
 |---|---|
-| **LLM e agentes** | LangChain · LangGraph · CrewAI · Claude · GLM · OpenAI · RAG · Prompt Engineering · Fine-tuning |
-| **Dados e recuperação** | PostgreSQL · pgvector · Qdrant · ChromaDB · Redis · SQL |
-| **Backend e infra** | Python · FastAPI · Docker · AWS · systemd · Git |
-| **ML** | Scikit-learn · XGBoost · LightGBM · Pandas · NumPy |
-| **Front** | Next.js · TypeScript · Tailwind |
+| **LLM e agentes** | LangGraph · LangChain · CrewAI · Claude · Gemini · GLM · OpenAI · RAG · Evals · Structured output |
+| **Dados e recuperação** | BigQuery · PostgreSQL · pgvector · Qdrant · ChromaDB · Redis · SQL |
+| **Backend e infra** | Python · FastAPI · Docker · GCP (Cloud Run, Vertex AI) · AWS · systemd · GitHub Actions |
+| **ML** | BigQuery ML · Scikit-learn · XGBoost · LightGBM · Pandas · NumPy |
+| **Front** | Next.js · React · TypeScript · Tailwind |
 
 ## Outros repositórios
 
